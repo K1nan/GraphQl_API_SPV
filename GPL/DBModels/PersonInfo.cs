@@ -6,30 +6,26 @@ namespace GPL.DBModels;
 
 public partial class PersonInfo
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
+    public string? Pn { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-
-    public DateTime? Fom { get; set; }
-    public DateTime? Tom { get; set; }
+    public DateTime Fom { get; set; }
+    public DateTime Tom { get; set; }
     public string? Salary { get; set; }
-    [NotMapped]
+
+    private int? _totalDays;
+    
     public int? TotalDays
     {
         get
         {
-            if (Tom.HasValue && Fom.HasValue)
-            {
-                return (Tom.Value - Fom.Value).Days;
-            }
-            else
-            {
-                return null;
-            }
+            if (!_totalDays.HasValue)
+                _totalDays = (Tom.Date - Fom.Date).Days;
+            return _totalDays;
         }
-        set { }
+        set => _totalDays = value;
     }
-
     public virtual Person? PersonId { get; set; }
 
 }
