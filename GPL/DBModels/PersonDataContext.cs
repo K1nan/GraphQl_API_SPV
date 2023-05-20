@@ -22,6 +22,8 @@ public partial class PersonDataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseInMemoryDatabase("PersonList");
+            partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
     //=> optionsBuilder.UseSqlServer("Data Source=LAPTOP-P6DCIL3L;Initial Catalog=ProductData;uid=sa;password=sql;TrustServerCertificate=True");
 
     // protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,5 +61,4 @@ public partial class PersonDataContext : DbContext
     //     OnModelCreatingPartial(modelBuilder);
     // }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
